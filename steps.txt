@@ -1,0 +1,123 @@
+phase I: back-end
+M:Mysql E:Express R:React N:Node
+
+we need to install these packages for each project we work on with sequelize:
+
+1- express --view=hbs todoApi
+2- npm i mysql mysql2 sequelize@4.43.0 
+3- code .
+4- sequelize init //this creates 4 folders models,config,migrations and seeders
+5- in config/config.json file: change password, db name and what needed:
+{
+  "development": {
+    "username": "root",
+    "password": "jobor0my",
+    "database": "L07HandsOn_auth",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+
+6- in app.js : var models = require('./models');
+	    // before last line:
+	    models.sequelize.sync().then(function () {
+              console.log("DataBase Sync0d up")
+            });
+
+--------------------------------------------
+- in case of of issue "operators"	   -
+- "operatorsAliases": false in config.json -
+--------------------------------------------
+7- sequelize db:create
+
+-here we do migration first approch:
+
+8- sequelize model:generate --name users --attributes firstName:string,lastName:string,email:string,username:string,password:string,Admin:string
+
+9- edit(in migration file and in models/users.js):
+
+    email: {
+        type: Sequelize.STRING,
+        unique: true // add this line in migration file
+      },
+      username: {
+        type: Sequelize.STRING,
+        unique : true // add this line in migration file
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now") // add this line //now: is a function to timestamp
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now") // add this line
+      }
+
+10-a sequelize db:migrate
+10-b check mysql database to see the created table.
+11- nodemon
+
+12 - add routes:
+---------- routes ------------------ test in postman -------
+
+add todo	- router.post : //localhost:3000/todos/add
+			{
+  		  	  "name":"code"
+			}
+all todo	- router.get : //localhost:3000/todos
+single todo	- router.get : //localhost:3000/todos/1
+update todo	- router.put : //localhost:3000/todos/1
+			{
+  		  	  "name":"code"
+			}
+delete todo	- router.delete : //localhost:3000/todos/1
+			{
+  		  	  "name":"code"
+			}
+-----------------------------------------------------------
+13- npm install i cors
+13- in app.js add :
+  - var cors = require('/cors');
+  - app.use(cors());
+
+phase II: front-end
+
+1- npx creat-react-app
+2- remove extra files
+2- create .env file and add:
+    - PORT=5000
+3- npm install i axios
+3- in src create components folder
+4- in components create TodoList.js and :
+  -   import import { useState, useEffect } from 'react'
+  -   import axios from 'axios'
+  -   create Todos function and use useState and useEffect here
+
+
+
+
+******************************
+data
+******************************
+//signup
+------
+{
+    "username":"ali",
+    "firstName":"ALI",
+    "lastName":"BINMAHFODH",
+    "email":"ali@uthink.com",
+    "password":"123"
+},
+
+------------------------------------------
+//login
+{ "email":"ali@uthink.com",
+  "password":"123"
+}
+************************************
+
+----------------------------------------------------
+
+
+

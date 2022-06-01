@@ -1,0 +1,5 @@
+http://localhost:2022/users/signup
+{"firstName":"ALI","lastname":"BINMAHFODH","email":"a@a.c","userName":"ali1","password","123"}
+
+
+{"email":"ali@uthink.com","password":"123"}

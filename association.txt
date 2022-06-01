@@ -1,0 +1,46 @@
+relationship bet users and todos:
+1 user has many to todos
+1 todo belongs to one user
+
+associations steps:
+1. in models/todos:
+	
+	todos.belongsTo(models.users);
+      	models.users.hasMany(todos); 
+
+2. sequelize-cli migration:generate --name todos-users-association
+
+this will create a new blank migration file
+
+3. in todos migration. add userId field manually:
+
+	userId: {
+        type: Sequelize.INTEGER
+      }
+
+4. in todos-users-association.js file :
+------------------------------------------
+	'use strict';
+
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    queryInterface.addConstraint('todos', {
+      fields: ['userId'],
+      type: 'foreign key',
+      name: 'todo_user_association',
+      references: {
+        table: 'users',
+        field: 'id'
+      }
+    });
+  },
+
+  async down (queryInterface, Sequelize) {
+    queryInterface.removeConstraint('todos','todo_user_association');
+  }
+};
+
+
+
+------------------------------------------
+5. sequelize db:migrate

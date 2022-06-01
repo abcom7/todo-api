@@ -1,0 +1,3 @@
+https://dev.to/nedsoft/add-new-fields-to-existing-sequelize-migration-3527
+https://stackoverflow.com/questions/46357533/how-to-add-delete-new-columns-in-sequelize-cli
+https://sequelize.org/docs/v6/core-concepts/assocs/#:~:text=model%20(%20A%20).-,The%20A.,unless%20they%20are%20already%20present).
